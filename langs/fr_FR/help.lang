@@ -1,0 +1,23 @@
+# ERP
+CommunitySupport=Assistance Forums et Wiki
+EMailSupport=Assistance par email
+RemoteControlSupport=Assistance en ligne temps réel
+OtherSupport=Autres type d'assistance
+ToSeeListOfAvailableRessources=Pour contacter/voir les ressources disponibles :
+HelpCenter=Centre d'assistance
+MounirHelpCenter=Centre d'aide et de support de ERP
+ToGoBackToMounir=Sinon, <a href="%s"> cliquez ici pour continuer à utiliser ERP </a>.
+TypeOfSupport=Source de l'assistance
+TypeSupportCommunauty=Communautaire (gratuit)
+TypeSupportCommercial=Commercial
+TypeOfHelp=Type
+NeedHelpCenter=Besoin d'assistance ou aide ?
+Efficiency=Efficacité
+TypeHelpOnly=Aide uniquement
+TypeHelpDev=Aide+Développement
+TypeHelpDevForm=Aide+Développement+Formation
+BackToHelpCenter=Sinon, cliquez ici pour <a href="%s">retourner au centre d'assistance</a>.
+LinkToGoldMember=Vous pouvez appeler immédiatement un des quelques accompagnateurs présélectionnés par ERP pour votre langue (%s) en cliquant son Widget (disponibilité et tarif maximum sont rafraîchis automatiquement):
+PossibleLanguages=Langues disponibles
+SubscribeToFoundation=Aidez le projet ERP, adhérez à l'association ERP
+SeeOfficalSupport=Pour un accompagnement officiel ERP dans votre langue : <br><b><a href="%s" target="_blank">%s</a></b>

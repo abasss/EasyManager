@@ -1,0 +1,7 @@
+From: mounir-robot@domain.com <mounir-robot@domain.com>
+Return-Path: mounir-robot@domain.com <mounir-robot@domain.com>
+X-Mailer: ERP version 2.7.0-beta (using php mail)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Testé
