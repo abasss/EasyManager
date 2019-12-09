@@ -674,7 +674,7 @@ function print_left_eldy_menu($db, $menu_array_before, $menu_array_after, &$tabM
 // abasssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
 
 //				$newmenu->add("/admin/menus.php?mainmenu=home", $langs->trans("Menus"), 1);
-				$newmenu->add("/admin/ihm.php?mainmenu=home", $langs->trans("GUISetup"), 1);
+//				$newmenu->add("/admin/ihm.php?mainmenu=home", $langs->trans("GUISetup"), 1);
 
 //				$newmenu->add("/admin/translation.php?mainmenu=home", $langs->trans("Translation"), 1);
 //				$newmenu->add("/admin/defaultvalues.php?mainmenu=home", $langs->trans("DefaultValues"), 1);

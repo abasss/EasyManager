@@ -1,4 +1,34 @@
 <?php
+/* Copyright (C) 2001-2004 Rodolphe Quiedeville <rodolphe@quiedeville.org>
+ * Copyright (C) 2003      Eric Seigne          <erics@rycks.com>
+ * Copyright (C) 2004-2018 Laurent Destailleur  <eldy@users.sourceforge.net>
+ * Copyright (C) 2005-2012 Regis Houssin        <regis.houssin@inodbox.com>
+ * Copyright (C) 2011      Juanjo Menent        <jmenent@2byte.es>
+ * Copyright (C) 2014      Cedric GROSS         <c.gross@kreiz-it.fr>
+ * Copyright (C) 2015      Marcos García        <marcosgdf@gmail.com>
+ * Copyright (C) 2017      Open-DSI             <support@open-dsi.fr>
+ * Copyright (C) 2018       Frédéric France         <frederic.france@netlogic.fr>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+
+/**
+ *  \file       htdocs/comm/action/index.php
+ *  \ingroup    agenda
+ *  \brief      Home page of calendar events
+ */
 
 require '../../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/societe/class/societe.class.php';
@@ -290,7 +320,6 @@ if ($action == 'show_day' || $action == 'show_week' || $action == 'show_month') 
 $param.="&maxprint=".urlencode($maxprint);
 
 // Show navigation bar
-/*
 if (empty($action) || $action=='show_month')
 {
     $nav ="<a href=\"?year=".$prev_year."&amp;month=".$prev_month.$param."\"><i class=\"fa fa-chevron-left\"></i></a> &nbsp;\n";
@@ -318,7 +347,7 @@ if ($action=='show_day')
     $nav.=" &nbsp; (<a href=\"?year=".$nowyear."&amp;month=".$nowmonth."&amp;day=".$nowday.$param."\">".$langs->trans("Today")."</a>)";
     $picto='calendarday';
 }
-*/
+
 // Must be after the nav definition
 $param.='&year='.$year.'&month='.$month.($day?'&day='.$day:'');
 //print 'x'.$param;
@@ -334,16 +363,15 @@ if ($action == 'show_list') $tabactive='cardlist';
 
 $paramnoaction=preg_replace('/action=[a-z_]+/', '', $param);
 
-//$head = calendars_prepare_head($paramnoaction);
-$head = "";
+$head = calendars_prepare_head($paramnoaction);
 
-// print '<form method="POST" id="searchFormList" class="listactionsfilter" action="'.$_SERVER["PHP_SELF"].'">'."\n";
-//if ($optioncss != '') print '<input type="hidden" name="optioncss" value="'.$optioncss.'">';
-// print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
+print '<form method="POST" id="searchFormList" class="listactionsfilter" action="'.$_SERVER["PHP_SELF"].'">'."\n";
+if ($optioncss != '') print '<input type="hidden" name="optioncss" value="'.$optioncss.'">';
+print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
 
-//dol_fiche_head($head, $tabactive, $langs->trans('Agenda'), 0, 'action');
-//print_actions_filter($form, $canedit, $status, $year, $month, $day, $showbirthday, 0, $filtert, 0, $pid, $socid, $action, $listofextcals, $actioncode, $usergroup, '', $resourceid);
-//dol_fiche_end();
+dol_fiche_head($head, $tabactive, $langs->trans('Agenda'), 0, 'action');
+print_actions_filter($form, $canedit, $status, $year, $month, $day, $showbirthday, 0, $filtert, 0, $pid, $socid, $action, $listofextcals, $actioncode, $usergroup, '', $resourceid);
+dol_fiche_end();
 
 
 // Define the legend/list of calendard to show
@@ -426,7 +454,7 @@ else 									// If javascript off
     $link.='</a>';
 }
 
-//print load_fiche_titre($s, $link.' &nbsp; &nbsp; '.$nav, '', 0, 0, 'tablelistofcalendars');
+print load_fiche_titre($s, $link.' &nbsp; &nbsp; '.$nav, '', 0, 0, 'tablelistofcalendars');
 
 
 // Load events from database into $eventarray
@@ -1007,39 +1035,78 @@ if (empty($action) || $action == 'show_month')      // View by month
     $newparam.='&viewcal=1';
 
 
-    // print '<div class="div-table-responsive-no-min">';
-    // print '<table width="100%" class="noborder nocellnopadd cal_pannel cal_month">';
-    // print ' <tr class="liste_titre">';
+    print '<div class="div-table-responsive-no-min">';
+    print '<table width="100%" class="noborder nocellnopadd cal_pannel cal_month">';
+    print ' <tr class="liste_titre">';
     $i=0;
-    // while ($i < 7)
-    // {
-        // print '  <td align="center">';
-        // $numdayinweek=(($i+(isset($conf->global->MAIN_START_WEEK)?$conf->global->MAIN_START_WEEK:1)) % 7);
-        // if (! empty($conf->dol_optimize_smallscreen))
-        // {
-            // $labelshort=array(0=>'SundayMin',1=>'MondayMin',2=>'TuesdayMin',3=>'WednesdayMin',4=>'ThursdayMin',5=>'FridayMin',6=>'SaturdayMin');
-            // print $langs->trans($labelshort[$numdayinweek]);
-        // }
-        // else print $langs->trans("Day".$numdayinweek);
-        // print '  </td>'."\n";
-        // $i++;
-    // }
-   // echo ' </tr>'."\n";
+    while ($i < 7)
+    {
+        print '  <td align="center">';
+        $numdayinweek=(($i+(isset($conf->global->MAIN_START_WEEK)?$conf->global->MAIN_START_WEEK:1)) % 7);
+        if (! empty($conf->dol_optimize_smallscreen))
+        {
+            $labelshort=array(0=>'SundayMin',1=>'MondayMin',2=>'TuesdayMin',3=>'WednesdayMin',4=>'ThursdayMin',5=>'FridayMin',6=>'SaturdayMin');
+            print $langs->trans($labelshort[$numdayinweek]);
+        }
+        else print $langs->trans("Day".$numdayinweek);
+        print '  </td>'."\n";
+        $i++;
+    }
+    echo ' </tr>'."\n";
 
     $todayarray=dol_getdate($now, 'fast');
     $todaytms=dol_mktime(0, 0, 0, $todayarray['mon'], $todayarray['mday'], $todayarray['year']);
 
     // In loops, tmpday contains day nb in current month (can be zero or negative for days of previous month)
     //var_dump($eventarray);
+    for ($iter_week = 0; $iter_week < 6 ; $iter_week++)
+    {
+        echo " <tr>\n";
+        for ($iter_day = 0; $iter_day < 7; $iter_day++)
+        {
+        	/* Show days before the beginning of the current month (previous month)  */
+            if ($tmpday <= 0)
+            {
+                $style='cal_other_month cal_past';
+        		if ($iter_day == 6) $style.=' cal_other_month_right';
+                echo '  <td class="'.$style.' nowrap" width="14%" valign="top">';
+                show_day_events($db, $max_day_in_prev_month + $tmpday, $prev_month, $prev_year, $month, $style, $eventarray, $maxprint, $maxnbofchar, $newparam);
+                echo "  </td>\n";
+            }
+            /* Show days of the current month */
+            elseif ($tmpday <= $max_day_in_month)
+            {
+                $curtime = dol_mktime(0, 0, 0, $month, $tmpday, $year);
+                $style='cal_current_month';
+                if ($iter_day == 6) $style.=' cal_current_month_right';
+                $today=0;
+                if ($todayarray['mday']==$tmpday && $todayarray['mon']==$month && $todayarray['year']==$year) $today=1;
+                if ($today) $style='cal_today';
+                if ($curtime < $todaytms) $style.=' cal_past';
+				//var_dump($todayarray['mday']."==".$tmpday." && ".$todayarray['mon']."==".$month." && ".$todayarray['year']."==".$year.' -> '.$style);
+                echo '  <td class="'.$style.' nowrap" width="14%" valign="top">';
+                show_day_events($db, $tmpday, $month, $year, $month, $style, $eventarray, $maxprint, $maxnbofchar, $newparam);
+                echo "  </td>\n";
+            }
+            /* Show days after the current month (next month) */
+            else
+			{
+                $style='cal_other_month';
+                if ($iter_day == 6) $style.=' cal_other_month_right';
+                echo '  <td class="'.$style.' nowrap" width="14%" valign="top">';
+                show_day_events($db, $tmpday - $max_day_in_month, $next_month, $next_year, $month, $style, $eventarray, $maxprint, $maxnbofchar, $newparam);
+                echo "</td>\n";
+            }
+            $tmpday++;
+        }
+        echo " </tr>\n";
+    }
+    print "</table>\n";
+	print '</div>';
 
-    
-	
-    // print "</table>\n";
-	// print '</div>';
-
-	// print '<input type="hidden" name="actionmove" value="mupdate">';
-	// print '<input type="hidden" name="backtopage" value="'.dol_escape_htmltag($_SERVER['PHP_SELF']).'?'.dol_escape_htmltag($_SERVER['QUERY_STRING']).'">';
-	// print '<input type="hidden" name="newdate" id="newdate">' ;
+	print '<input type="hidden" name="actionmove" value="mupdate">';
+	print '<input type="hidden" name="backtopage" value="'.dol_escape_htmltag($_SERVER['PHP_SELF']).'?'.dol_escape_htmltag($_SERVER['QUERY_STRING']).'">';
+	print '<input type="hidden" name="newdate" id="newdate">' ;
 }
 elseif ($action == 'show_week') // View by week
 {
@@ -1054,18 +1121,18 @@ elseif ($action == 'show_week') // View by week
     $newparam=preg_replace('/showbirthday_=/i', 'showbirthday=', $newparam);	// Restore correct parameter
     $newparam.='&viewweek=1';
 
-    // print '<div class="div-table-responsive-no-min">';
-    // print '<table width="100%" class="noborder nocellnopadd cal_pannel cal_month">';
-    // print ' <tr class="liste_titre">';
+    print '<div class="div-table-responsive-no-min">';
+    print '<table width="100%" class="noborder nocellnopadd cal_pannel cal_month">';
+    print ' <tr class="liste_titre">';
     $i=0;
     while ($i < 7)
     {
-        //echo '  <td align="center">'.$langs->trans("Day".(($i+(isset($conf->global->MAIN_START_WEEK)?$conf->global->MAIN_START_WEEK:1)) % 7))."</td>\n";
+        echo '  <td align="center">'.$langs->trans("Day".(($i+(isset($conf->global->MAIN_START_WEEK)?$conf->global->MAIN_START_WEEK:1)) % 7))."</td>\n";
         $i++;
     }
-    // echo " </tr>\n";
+    echo " </tr>\n";
 
-    // echo " <tr>\n";
+    echo " <tr>\n";
 
     for ($iter_day = 0; $iter_day < 7; $iter_day++)
     {
@@ -1083,18 +1150,18 @@ elseif ($action == 'show_week') // View by week
         if ($todayarray['mday']==$tmpday && $todayarray['mon']==$tmpmonth && $todayarray['year']==$tmpyear) $today=1;
         if ($today) $style='cal_today';
 
-       // echo '  <td class="'.$style.'" width="14%" valign="top">';
-       // show_day_events($db, $tmpday, $tmpmonth, $tmpyear, $month, $style, $eventarray, 0, $maxnbofchar, $newparam, 1, 300);
-       // echo "  </td>\n";
+        echo '  <td class="'.$style.'" width="14%" valign="top">';
+        show_day_events($db, $tmpday, $tmpmonth, $tmpyear, $month, $style, $eventarray, 0, $maxnbofchar, $newparam, 1, 300);
+        echo "  </td>\n";
     }
-    // echo " </tr>\n";
+    echo " </tr>\n";
 
-    // print "</table>\n";
-	// print '</div>';
+    print "</table>\n";
+	print '</div>';
 
-    // echo '<input type="hidden" name="actionmove" value="mupdate">';
-    // echo '<input type="hidden" name="backtopage" value="'.dol_escape_htmltag($_SERVER['PHP_SELF']).'?'.dol_escape_htmltag($_SERVER['QUERY_STRING']).'">';
-    // echo '<input type="hidden" name="newdate" id="newdate">' ;
+    echo '<input type="hidden" name="actionmove" value="mupdate">';
+    echo '<input type="hidden" name="backtopage" value="'.dol_escape_htmltag($_SERVER['PHP_SELF']).'?'.dol_escape_htmltag($_SERVER['QUERY_STRING']).'">';
+    echo '<input type="hidden" name="newdate" id="newdate">' ;
 }
 else    // View by day
 {
@@ -1114,12 +1181,12 @@ else    // View by day
     $arraytimestamp=dol_getdate($timestamp);
 
     //echo '<table class="tagtable centpercent noborder nocellnopadd cal_pannel cal_month">';
-    // echo '<table class="tagtable centpercent noborder nocellnopadd cal_pannel cal_month noborderbottom" style="margin-bottom: 5px !important;">';
+    echo '<table class="tagtable centpercent noborder nocellnopadd cal_pannel cal_month noborderbottom" style="margin-bottom: 5px !important;">';
 
-    // echo ' <tr class="tagtr liste_titre">';
-    // echo '  <td class="tagtd width100"></td>';
-    // echo '  <td class="tagtd center">'.$langs->trans("Day".$arraytimestamp['wday'])."</td>\n";
-    // echo " </td>\n";
+    echo ' <tr class="tagtr liste_titre">';
+    echo '  <td class="tagtd width100"></td>';
+    echo '  <td class="tagtd center">'.$langs->trans("Day".$arraytimestamp['wday'])."</td>\n";
+    echo " </td>\n";
 
     /*
     echo ' <div class="tagtr">';
@@ -1130,11 +1197,10 @@ else    // View by day
     echo " </div>\n";
 	*/
 
-   // echo '</table>';
+    echo '</table>';
 
     /* WIP View per hour */
     $useviewhour = 0;
-/*
     if ($useviewhour)
     {
     	print '<div class="div-table-responsive-no-min borderbottom">';		// You can use div-table-responsive-no-min if you dont need reserved height for your table
@@ -1180,7 +1246,6 @@ else    // View by day
 
     	print '</div>';
     }
-*/
 }
 
 print "\n".'</form>';

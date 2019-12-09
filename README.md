@@ -1,4 +1,0 @@
-# EasyManager
-EasyManager
-abass
-youssef

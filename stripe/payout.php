@@ -1,5 +1,4 @@
 <?php
-// Put here all includes required by your class file
 
 require '../main.inc.php';
 require_once DOL_DOCUMENT_ROOT.'/societe/class/societe.class.php';
