@@ -1,41 +1,4 @@
 <?php
-/* Copyright (C) 2001-2002  Rodolphe Quiedeville    <rodolphe@quiedeville.org>
- * Copyright (C) 2001-2002  Jean-Louis Bergamo      <jlb@j1b.org>
- * Copyright (C) 2006-2013  Laurent Destailleur     <eldy@users.sourceforge.net>
- * Copyright (C) 2012       Regis Houssin           <regis.houssin@inodbox.com>
- * Copyright (C) 2012       J. Fernando Lagrange    <fernando@demo-tic.org>
- * Copyright (C) 2018       Frédéric France         <frederic.france@netlogic.fr>
- * Copyright (C) 2018       Alexandre Spangaro      <aspangaro@open-dsi.fr>
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- *	\file       htdocs/public/members/new.php
- *	\ingroup    member
- *	\brief      Example of form to add a new member
- *
- *  Note that you can add following constant to change behaviour of page
- *  MEMBER_NEWFORM_AMOUNT               Default amount for auto-subscribe form
- *  MEMBER_NEWFORM_EDITAMOUNT           0 or 1 = Amount can be edited
- *  MEMBER_NEWFORM_PAYONLINE            Suggest payment with paypal, paybox or stripe
- *  MEMBER_NEWFORM_MOUNIRTURNOVER     Show field turnover (specific for mounir foundation)
- *  MEMBER_URL_REDIRECT_SUBSCRIPTION    Url to redirect once subscribe submitted
- *  MEMBER_NEWFORM_FORCETYPE            Force type of member
- *  MEMBER_NEWFORM_FORCEMORPHY          Force nature of member (mor/phy)
- *  MEMBER_NEWFORM_FORCECOUNTRYCODE     Force country
- */
 
 if (! defined('NOLOGIN'))		define("NOLOGIN", 1);		// This means this output page does not require to be logged.
 if (! defined('NOCSRFCHECK'))	define("NOCSRFCHECK", 1);	// We accept to go on this page from external web site.
