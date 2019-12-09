@@ -1635,7 +1635,7 @@ function top_menu($head, $title = '', $target = '', $disablejs = 0, $disablehead
 			//$text.= img_picto(":".$langs->trans("PrintContentArea"), 'printer_top.png', 'class="printer"');
 			$text.='<span class="fa fa-print atoplogin valignmiddle"></span>';
 			$text.='</a>';
-			$toprightmenu.=@Form::textwithtooltip('', $langs->trans("PrintContentArea"), 2, 1, $text, 'login_block_elem', 2);
+			//$toprightmenu.=@Form::textwithtooltip('', $langs->trans("PrintContentArea"), 2, 1, $text, 'login_block_elem', 2);
 		}
 
 		// Link to ERP wiki pages
@@ -1672,7 +1672,7 @@ function top_menu($head, $title = '', $target = '', $disablejs = 0, $disablehead
 				$text.='">';
 				$text.='<span class="fa fa-question-circle atoplogin valignmiddle"></span>';
 				$text.='</a>';
-				$toprightmenu.=@Form::textwithtooltip('', $title, 2, 1, $text, 'login_block_elem', 2);
+				//$toprightmenu.=@Form::textwithtooltip('', $title, 2, 1, $text, 'login_block_elem', 2);
 			}
 		}
 
