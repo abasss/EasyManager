@@ -29,7 +29,7 @@
 		"ccampbell/chromephp" : "4.1.0",
 		"ckeditor/ckeditor" : "4.6.2",
 		"mike42/escpos-php" : "1.2.1",
-		"mobiledetect/mobiledetectlib" : "2.8.17",
+		"mobiledetect/mobiledetectlib" : "2.8.32",
 		"phpoffice/phpexcel" : "1.8.1",
 		"restler/framework" : "3.0.0-RC6",
 		"tecnickcom/tcpdf" : "^6.2",
